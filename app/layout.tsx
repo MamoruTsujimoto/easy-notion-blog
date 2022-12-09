@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { motion } from 'framer-motion'
 
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import Footer from '@/components/layout/footer'
 
 import 'styles/syntax-coloring.css'
 
