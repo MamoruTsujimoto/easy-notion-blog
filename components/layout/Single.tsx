@@ -337,7 +337,7 @@ const Header = styled.header`
   h1 {
     display: block;
     margin: 30px auto 0;
-    width: ${styles.sizes.desktop.single};
+    width: 100%;
     color: #404040;
     text-align: center;
     font-family: 'ヒラギノ明朝 ProN W3', HiraMinProN-W3, YuMincho, 游明朝, 'ＭＳ Ｐ明朝', 'MS PMincho', 'MS 明朝', serif;
