@@ -139,7 +139,7 @@ const TableOfContents = ({ block, blocks }) => {
           }
 
           return (
-            <li>
+            <li key={headingBlock.Id}>
               <a
                 href={`#${buildHeadingId(heading)}`}
                 className={`${colorClass(block.TableOfContents.Color)} ${styles[indentClass]}`}
