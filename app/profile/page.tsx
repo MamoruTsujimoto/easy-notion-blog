@@ -1,6 +1,5 @@
 'use client'
 
-import type { NextPage } from 'next'
 import Image from 'next/image'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,7 +7,7 @@ import config from 'utils/config'
 import styles from 'utils/styles'
 import functions from 'utils/functions'
 
-const Profile: NextPage = () => {
+const Profile = () => {
   const Birthdate = {
     year: config.profile.birth.year,
     month: config.profile.birth.month,
