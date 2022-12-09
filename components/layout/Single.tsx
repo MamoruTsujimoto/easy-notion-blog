@@ -31,6 +31,8 @@ const Single = ({ post, blocks }: Props) => {
     controls.start(inView ? 'visible' : 'hidden')
   }, [controls, inView])
 
+  console.log(ref)
+
   return (
     <SingleWrapper>
       <Root>
@@ -59,12 +61,12 @@ const Single = ({ post, blocks }: Props) => {
           )}
         </Header>
 
-        <motion.div ref={ref} initial='hidden' animate={controls} variants={animations.fadeInUp}>
-          <Body>
-            <NoContents contents={blocks} />
-            <PostBody blocks={blocks} />
-          </Body>
-        </motion.div>
+        {/* <motion.div ref={ref} initial='visible' animate={controls} variants={animations.fadeInUp}> */}
+        <Body>
+          <NoContents contents={blocks} />
+          <PostBody blocks={blocks} />
+        </Body>
+        {/* </motion.div> */}
       </Root>
     </SingleWrapper>
   )
