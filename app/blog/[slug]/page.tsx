@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
-import { Post } from 'lib/notion/interfaces'
 import GoogleAnalytics from 'components/google-analytics'
-import { getAllPosts, getPostBySlug, getPostsByTag, getAllBlocksByBlockId } from 'lib/notion/client'
+import { getAllPosts, getPostBySlug, getAllBlocksByBlockId } from 'lib/notion/client'
 
 import Single from 'components/layout/Single'
 
@@ -21,14 +20,12 @@ const BlogSlugPage = async ({ params: { slug } }) => {
     redirect('/blog')
   }
 
-  const [blocks, sameTagPosts] = await Promise.all([getAllBlocksByBlockId(post.PageId), getPostsByTag(post.Tags[0], 6)])
-
-  const otherPostsHavingSameTag = sameTagPosts.filter((p: Post) => p.Slug !== post.Slug)
+  const [blocks] = await Promise.all([getAllBlocksByBlockId(post.PageId)])
 
   return (
     <>
       <GoogleAnalytics pageTitle={post.Title} />
-      <Single post={post} blocks={blocks} sameTagPosts={otherPostsHavingSameTag} />
+      <Single post={post} blocks={blocks} />
     </>
   )
 }

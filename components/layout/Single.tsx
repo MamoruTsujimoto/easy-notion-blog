@@ -17,18 +17,15 @@ import { NoContents, PostBody, PostDate, PostTags, PostTitle } from 'components/
 type Props = {
   post: Post
   blocks: Block[]
-  sameTagPosts: Post[]
 }
 
-const Single = ({ post, blocks, sameTagPosts }: Props) => {
+const Single = ({ post, blocks }: Props) => {
   const controls = useAnimation()
 
   const { ref, inView } = useInView({
     threshold: 0.25,
     triggerOnce: true,
   })
-
-  const sameTag = sameTagPosts.slice(0, 3)
 
   useEffect(() => {
     controls.start(inView ? 'visible' : 'hidden')
@@ -461,8 +458,6 @@ const Picture = styled.picture`
 
   .pictureCaption {
     padding: 15px 10px;
-    // opacity: 1;
-    // transition: 0.5s;
     color: #fff;
     background-color: #000;
     text-align: right;
@@ -477,28 +472,6 @@ const Picture = styled.picture`
       background-color: #000;
     }
   }
-
-  // &:hover {
-  //   box-shadow: 0 10px 90px -30px rgba(0, 0, 0, 0.4);
-
-  //   @media (max-width: ${styles.sizes.breakpoint.small}) {
-  //     box-shadow: none;
-  //   }
-
-  //   .outline {
-  //     border-color: #000;
-
-  //     @media (max-width: ${styles.sizes.breakpoint.small}) {
-  //       border-color: #e9e9eb;
-  //     }
-  //   }
-
-  //   .pictureCaption {
-  //     opacity: 1;
-  //     color: #fff;
-  //     background-color: #000;
-  //   }
-  // }
 
   .aligncenter {
     display: table;
@@ -625,21 +598,6 @@ const Body = styled.div`
     }
   }
 
-  /* pre {
-    margin: 20px auto;
-    padding: 10px 10px;
-    background-color: #242424;
-    color: #fff;
-
-    ${styles.mixins.fontSize(14, 26)}
-
-    cursor: text;
-
-    @media (max-width: ${styles.sizes.breakpoint.small}) {
-      overflow: auto;
-    }
-  } */
-
   ul,
   ol {
     margin: 20px auto;
@@ -725,54 +683,6 @@ const Body = styled.div`
     p {
       ${styles.mixins.fontSize(13, 24)}
     }
-  }
-`
-
-const FooterContents = styled.footer`
-  display: flex;
-  justify-content: center;
-`
-
-const SameTagPosts = styled.div`
-  width: 100%;
-  max-width: 1200px;
-
-  ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    margin: 20px 0 50px;
-
-    li {
-      position: relative;
-      width: 100%;
-
-      a {
-        display: block;
-
-        span {
-          ${styles.mixins.fontSize(12, 24)}
-        }
-
-        .story-figure {
-          &:hover {
-            opacity: 1;
-            filter: grayscale(0);
-          }
-        }
-      }
-    }
-  }
-
-  .story-figure {
-    width: 100%;
-    height: 250px;
-    transition: all 1000ms 0s ease;
-    filter: grayscale(100%);
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: cover;
   }
 `
 
