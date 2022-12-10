@@ -63,7 +63,7 @@ const Wrapper = styled.div`
     grid:
       'header' 55px
       'main' 1fr
-      'footer' 82.5px
+      'footer' 1fr
       / 1fr;
     gap: 5px;
   }

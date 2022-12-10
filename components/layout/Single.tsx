@@ -1,12 +1,16 @@
 'use client'
 
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import styled from '@emotion/styled'
+import { motion, useAnimation } from 'framer-motion'
 import { NEXT_PUBLIC_URL } from 'app/server-constants'
 import { Post, Block } from 'lib/notion/interfaces'
 import SocialButtons from 'components/social-buttons'
 import { getBlogLink } from 'lib/blog-helpers'
 import styles from 'utils/styles'
 import mixins from 'utils/styles/mixins'
+import animations from 'utils/animations'
 
 import { NoContents, PostBody, PostDate, PostTags, PostTitle } from 'components/blog-parts'
 
@@ -16,6 +20,17 @@ type Props = {
 }
 
 const Single = ({ post, blocks }: Props) => {
+  const controls = useAnimation()
+
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  })
+
+  useEffect(() => {
+    controls.start(inView ? 'visible' : 'hidden')
+  }, [controls, inView])
+
   return (
     <SingleWrapper>
       <Root>
@@ -44,10 +59,12 @@ const Single = ({ post, blocks }: Props) => {
           )}
         </Header>
 
-        <Body>
-          <NoContents contents={blocks} />
-          <PostBody blocks={blocks} />
-        </Body>
+        <motion.div ref={ref} initial='visible' animate={controls} variants={animations.fadeInUp}>
+          <Body>
+            <NoContents contents={blocks} />
+            <PostBody blocks={blocks} />
+          </Body>
+        </motion.div>
       </Root>
     </SingleWrapper>
   )

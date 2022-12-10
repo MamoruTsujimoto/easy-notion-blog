@@ -31,6 +31,7 @@ module.exports = {
   outputFileTracing: false,
   experimental: {
     appDir: true,
+    esmExternals: false,
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

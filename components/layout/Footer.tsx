@@ -1,13 +1,20 @@
 import Script from 'next/script'
 import styled from '@emotion/styled'
 import config from 'utils/config'
+import styles from 'utils/styles'
 
 const Footer = () => {
   return (
     <Root>
       <COPYRIGHT>
-        &copy; 2022 {config.info.siteName} | Powered by{' '}
-        <SPECIALTHANKS href='https://github.com/otoyo/easy-notion-blog'>easy-notion-blog</SPECIALTHANKS>
+        &copy; 2022 {config.info.siteName}
+        <SPECIALTHANKS>
+          {' '}
+          Powered by{' '}
+          <a href='https://github.com/otoyo/easy-notion-blog' target='_blank'>
+            easy-notion-blog
+          </a>
+        </SPECIALTHANKS>
       </COPYRIGHT>
       <DMCA>
         <a
@@ -30,13 +37,23 @@ const Root = styled.footer`
   grid-area: footer;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   text-align: center;
   color: #fff;
   background-color: #000000;
 
+  @media (max-width: ${styles.sizes.breakpoint.small}) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   p {
     padding: 1rem;
     font-size: 1.2rem;
+
+    @media (max-width: ${styles.sizes.breakpoint.small}) {
+      width: 100%;
+    }
   }
 
   a {
@@ -44,13 +61,22 @@ const Root = styled.footer`
   }
 `
 
-const COPYRIGHT = styled.p`
+const COPYRIGHT = styled.div`
   padding: 1rem;
   font-size: 1.2rem;
 `
 
-const SPECIALTHANKS = styled.a`
+const SPECIALTHANKS = styled.span`
   font-size: 1.2rem;
+  &:before {
+    content: ' | ';
+  }
+  @media (max-width: ${styles.sizes.breakpoint.small}) {
+    display: block;
+    &:before {
+      content: '';
+    }
+  }
 `
 
 const DMCA = styled.div`
