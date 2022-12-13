@@ -6,6 +6,8 @@ import { Post } from 'lib/notion/interfaces'
 import DateFormatter from 'components/Date'
 import styles from 'utils/styles'
 
+import { NEXT_PUBLIC_URL } from 'app/server-constants'
+
 type Props = {
   posts: Post[]
   title: string
@@ -19,7 +21,12 @@ const CardSmall = ({ posts, title }: Props) => {
         {posts.map((post) => (
           <Article key={post.Slug}>
             <Link as={`/blog/${post.Slug}`} href={`/blog/${post.Slug}`} passHref scroll={false}>
-              <div className='story-figure figure' style={{ backgroundImage: `url(${post.coverEyeCatch})` }}></div>
+              <div
+                className='story-figure figure'
+                style={{
+                  backgroundImage: `url('${new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}`,
+                }}
+              ></div>
               <div className='story-entrance'>
                 <span className='story-category'>{post.Tags}</span>
                 <h1>{post.Title}</h1>
