@@ -7,6 +7,8 @@ import { ButtonLarge } from 'components/base/Button'
 import DateFormatter from 'components/Date'
 import styles from 'utils/styles'
 
+import { NEXT_PUBLIC_URL } from 'app/server-constants'
+
 type Props = {
   post: Post
 }
@@ -36,7 +38,10 @@ const CardLarge = ({ post }: Props) => {
             <ButtonLarge>read more</ButtonLarge>
           </CMBody>
           <CMPicture>
-            <div className='new-image outline' style={{ backgroundImage: `url('${post.coverEyeCatch}` }}></div>
+            <div
+              className='new-image outline'
+              style={{ backgroundImage: `url('${new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}` }}
+            ></div>
           </CMPicture>
         </Link>
       </CMArticle>
