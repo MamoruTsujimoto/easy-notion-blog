@@ -11,7 +11,7 @@ const Footer = () => {
         <SPECIALTHANKS>
           {' '}
           Powered by{' '}
-          <a href='https://github.com/otoyo/easy-notion-blog' target='_blank'>
+          <a href='https://github.com/otoyo/easy-notion-blog' target='_blank' rel='noreferrer'>
             easy-notion-blog
           </a>
         </SPECIALTHANKS>

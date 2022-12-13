@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import got from 'got'
-import { getPostBySlug } from '../../../lib/notion/client'
+import { getPostBySlug } from 'lib/notion/client'
 
-const ApiOgImage = async function(req: NextApiRequest, res: NextApiResponse) {
+const ApiOgImage = async function (req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
     res.statusCode = 400
     res.end()
