@@ -32,7 +32,7 @@ const Single = ({ post, blocks }: Props) => {
 
   const onLoad = (e) => {
     if (e.target.srcset) {
-      return e.target.dataset.load
+      e.target.dataset.load = 'done'
     }
   }
 
