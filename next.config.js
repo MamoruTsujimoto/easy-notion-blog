@@ -39,6 +39,6 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['s3.us-west-2.amazonaws.com', 'localhost'],
+    domains: ['s3.us-west-2.amazonaws.com', 'tsujimotomamoru.com', 'localhost'],
   },
 }
