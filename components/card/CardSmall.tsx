@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
-import Date from 'components/Date'
+import DateFormatter from 'components/Date'
 import styles from 'utils/styles'
 
 import { NEXT_PUBLIC_URL } from 'app/server-constants'
@@ -44,7 +44,7 @@ const CardSmall = ({ posts, title }: Props) => {
                 <div className='story-information'>
                   <ul className='story-status'>
                     <li>
-                      <Date dateString={post.Date} />
+                      <DateFormatter dateString={post.Date} />
                     </li>
                   </ul>
                   <p>{post.Excerpt}</p>
