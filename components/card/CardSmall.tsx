@@ -44,9 +44,7 @@ const CardSmall = ({ posts, title }: Props) => {
                 <div className='story-information'>
                   <ul className='story-status'>
                     <li>
-                      <span className='story-publish'>
-                        <DateFormatter dateString={post.Date} />
-                      </span>
+                      <DateFormatter dateString={post.Date} />
                     </li>
                   </ul>
                   <p>{post.Excerpt}</p>
@@ -371,6 +369,12 @@ const Article = styled.article`
     &-status {
       li {
         text-align: right;
+
+        time {
+          color: #4b4b4b;
+
+          ${styles.mixins.fontSize(12, 12)}
+        }
       }
     }
 
