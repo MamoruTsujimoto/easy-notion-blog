@@ -370,7 +370,7 @@ const Article = styled.article`
       li {
         text-align: right;
 
-        time {
+        span {
           color: #4b4b4b;
 
           ${styles.mixins.fontSize(12, 12)}

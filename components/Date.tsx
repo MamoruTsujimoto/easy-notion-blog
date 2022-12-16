@@ -6,7 +6,7 @@ type Props = {
 
 const Date = ({ dateString }: Props) => {
   const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+  return <span>{format(date, 'LLLL	d, yyyy')}</span>
 }
 
 export default Date
