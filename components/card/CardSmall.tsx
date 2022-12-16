@@ -37,6 +37,18 @@ const CardSmall = ({ posts, title }: Props) => {
                   style={{ objectFit: 'cover' }}
                 />
               </div>
+              <div className='story-entrance'>
+                <span className='story-category'>{post.Tags}</span>
+                <h1>{post.Title}</h1>
+                <div className='story-information'>
+                  <ul className='story-status'>
+                    <li>
+                      <span className='story-publish'></span>
+                    </li>
+                  </ul>
+                  <p>{post.Excerpt}</p>
+                </div>
+              </div>
             </Link>
           </Article>
         ))}
