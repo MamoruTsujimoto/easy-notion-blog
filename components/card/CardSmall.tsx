@@ -1,10 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
 import DateFormatter from 'components/Date'
 import styles from 'utils/styles'
+
+import { NEXT_PUBLIC_URL } from 'app/server-constants'
 
 type Props = {
   posts: Post[]
@@ -12,6 +15,12 @@ type Props = {
 }
 
 const CardSmall = ({ posts, title }: Props) => {
+  const onLoad = (e) => {
+    if (e.target.srcset) {
+      e.target.dataset.load = 'done'
+    }
+  }
+
   return (
     <Section>
       <h1 className='section-title'>{title}</h1>
@@ -19,7 +28,16 @@ const CardSmall = ({ posts, title }: Props) => {
         {posts.map((post) => (
           <Article key={post.Slug}>
             <Link as={`/blog/${post.Slug}`} href={`/blog/${post.Slug}`} passHref scroll={false}>
-              <div className='story-figure figure' style={{ backgroundImage: `url(${post.coverEyeCatch})` }}></div>
+              <div className='story-figure figure'>
+                <Image
+                  src={new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}
+                  width={373}
+                  height={250}
+                  alt={post.coverCaption}
+                  onLoad={onLoad}
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
               <div className='story-entrance'>
                 <span className='story-category'>{post.Tags}</span>
                 <h1>{post.Title}</h1>
@@ -179,6 +197,19 @@ const Section = styled.section`
       background-position: top center;
       background-size: cover;
 
+      img {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+
+        @media (max-width: ${styles.sizes.breakpoint.small}) {
+          width: 100%;
+        }
+
+        &[data-load='done'] {
+          opacity: 1;
+        }
+      }
+
       &.no-image {
         background-image: url(#{$IMG_PATH}/no-image.svg);
         background-size: 100px auto;
@@ -238,7 +269,7 @@ const Article = styled.article`
         width: 100%;
         min-height: 825px;
 
-        @media #{$small} {
+        @media (max-width: ${styles.sizes.breakpoint.small}) {
           margin-bottom: 35px;
           &:after {
             content: '⋯';
@@ -251,7 +282,7 @@ const Article = styled.article`
         &:last-of-type {
           margin-right: 0;
 
-          @media #{$small} {
+          @media (max-width: ${styles.sizes.breakpoint.small}) {
             margin-bottom: 0;
 
             &:after {
@@ -271,7 +302,7 @@ const Article = styled.article`
 
           letter-spacing: 0.15em;
 
-          @media #{$small} {
+          @media (max-width: ${styles.sizes.breakpoint.small}) {
             min-height: auto;
             max-height: auto;
           }
@@ -377,10 +408,9 @@ const Article = styled.article`
       transition: all 1000ms 0s ease;
       filter: grayscale(100%);
 
-      @media #{$middle} {
+      @media (max-width: ${styles.sizes.breakpoint.small}) {
         padding-top: 0;
-        height: 100vh;
-        filter: none;
+        filter: grayscale(0);
       }
 
       &.other {
@@ -391,7 +421,7 @@ const Article = styled.article`
       &.outline {
         border: 1px solid #dddddd;
 
-        @media #{$small} {
+        @media (max-width: ${styles.sizes.breakpoint.small}) {
           border: none;
           border-top: 1px solid $color-border;
         }

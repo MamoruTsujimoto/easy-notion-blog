@@ -1,5 +1,6 @@
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
 import { NextPageLink, NoContents } from 'components/blog-parts'
+import Wrapper from 'components/base/Wrapper'
 import CardLarge from 'components/card/CardLarge'
 import CardSmall from 'components/card/CardSmall'
 import config from 'utils/config'
@@ -14,7 +15,7 @@ const RootPage = async () => {
   const pastPost = posts.slice(1, postNum)
 
   return (
-    <>
+    <Wrapper>
       <NoContents contents={posts} />
       <CardLarge post={newPost} />
       <CardSmall title='archives' posts={pastPost} />
@@ -22,7 +23,7 @@ const RootPage = async () => {
       <footer>
         <NextPageLink firstPost={firstPost} posts={posts} />
       </footer>
-    </>
+    </Wrapper>
   )
 }
 

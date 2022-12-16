@@ -16,13 +16,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='ja'>
       <body>
         <Root>
-          <Wrapper>
+          <Grid>
             <Header />
             <motion.div initial='hidden' animate='visible' variants={animations.fadeIn}>
               <Main>{children}</Main>
             </motion.div>
             <Footer />
-          </Wrapper>
+          </Grid>
         </Root>
       </body>
     </html>
@@ -48,12 +48,12 @@ const Root = styled.div`
   }
 `
 
-const Wrapper = styled.div`
+const Grid = styled.div`
   display: grid;
   grid:
     'header' 86px
     'main' 1fr
-    'footer' 37px
+    'footer' 40px
     / 1fr;
   gap: 8px;
   height: 100vh;
@@ -83,8 +83,6 @@ const Main = styled.main`
   grid-area: main;
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
 
   @media (max-width: ${styles.sizes.breakpoint.small}) {
     max-width: 100%;

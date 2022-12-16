@@ -1,5 +1,5 @@
 'use client'
-
+import Image from 'next/image'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import styled from '@emotion/styled'
@@ -27,6 +27,9 @@ const Single = ({ post, blocks }: Props) => {
     triggerOnce: true,
   })
 
+  const imagePost = new URL(`/api/cover-post/${post.Slug}`, NEXT_PUBLIC_URL).toString()
+  const imagePostSP = new URL(`/api/cover-post-sp/${post.Slug}`, NEXT_PUBLIC_URL).toString()
+
   useEffect(() => {
     controls.start(inView ? 'visible' : 'hidden')
   }, [controls, inView])
@@ -43,9 +46,20 @@ const Single = ({ post, blocks }: Props) => {
             </ul>
           </Meta>
           <Picture>
-            <source srcSet={`${post.coverPostImage}`} media='(min-width: 769px)' />
-            {post.coverPostImageSP && <source srcSet={`${post.coverPostImageSP}`} media='(max-width: 768px)' />}
-            <img src={`${post.coverEyeCatch}`} alt='画像' />
+            <source srcSet={imagePost} media='(min-width: 769px)' />
+            {post.coverPostImageSP && <source srcSet={imagePostSP} media='(max-width: 768px)' />}
+            <Image
+              src={imagePost}
+              alt={post.coverCaption}
+              width={700}
+              height={475}
+              sizes='100vw'
+              style={{
+                objectFit: 'cover',
+              }}
+              placeholder='blur'
+              blurDataURL='data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+            />
             <div className='pictureCaption'>{post.coverCaption}</div>
           </Picture>
           {NEXT_PUBLIC_URL && (
@@ -452,8 +466,11 @@ const Picture = styled.picture`
 
   img {
     width: 100%;
-    max-height: 700px;
-    object-fit: cover;
+    height: 700px;
+
+    @media (max-width: ${styles.sizes.breakpoint.small}) {
+      height: auto;
+    }
   }
 
   .pictureCaption {

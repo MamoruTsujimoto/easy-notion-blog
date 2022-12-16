@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
 import { ButtonLarge } from 'components/base/Button'
@@ -14,6 +15,14 @@ type Props = {
 }
 
 const CardLarge = ({ post }: Props) => {
+  const onLoad = (e) => {
+    if (e.target.srcset) {
+      e.target.dataset.load = 'done'
+    }
+  }
+
+  const imageURL = new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()
+
   return (
     <CMSection>
       <CMArticle id={post.Date}>
@@ -38,10 +47,16 @@ const CardLarge = ({ post }: Props) => {
             <ButtonLarge>read more</ButtonLarge>
           </CMBody>
           <CMPicture>
-            <div
-              className='new-image outline'
-              style={{ backgroundImage: `url('${new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}` }}
-            ></div>
+            <div className='new-image outline'>
+              <Image
+                src={imageURL}
+                width={780}
+                height={580}
+                alt={post.coverCaption}
+                onLoad={onLoad}
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </CMPicture>
         </Link>
       </CMArticle>
@@ -220,6 +235,15 @@ const CMPicture = styled.div`
       background: #fff url(#{$IMG_PATH}/no-image.svg) center center no-repeat;
       background-size: 100px auto;
       border: 1px solid #ddd;
+    }
+
+    img {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+
+      &[data-load='done'] {
+        opacity: 1;
+      }
     }
 
     &.outline {

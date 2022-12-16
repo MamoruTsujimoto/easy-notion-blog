@@ -1,5 +1,7 @@
-const fs = require('fs')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { NOTION_API_SECRET, DATABASE_ID } = require('./app/server-constants')
 
 const warnOrError =
@@ -37,6 +39,6 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['s3.us-west-2.amazonaws.com', 'images.unsplash.com'],
+    domains: ['s3.us-west-2.amazonaws.com', 'localhost'],
   },
 }
