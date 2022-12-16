@@ -5,6 +5,8 @@ import { global as globalStyles } from 'utils/styles'
 
 import { NEXT_PUBLIC_URL, NEXT_PUBLIC_SITE_TITLE, NEXT_PUBLIC_SITE_DESCRIPTION } from '../app/server-constants'
 
+import config from 'utils/config'
+
 const DocumentHead = ({ title = '', description = '', path = '', urlOgImage = '' }) => (
   <>
     <title>{title ? `${title} - ${NEXT_PUBLIC_SITE_TITLE}` : NEXT_PUBLIC_SITE_TITLE}</title>
@@ -25,6 +27,10 @@ const DocumentHead = ({ title = '', description = '', path = '', urlOgImage = ''
       <meta name='twitter:image' content={new URL('/default.png', NEXT_PUBLIC_URL).toString()} />
     ) : null}
     {NEXT_PUBLIC_URL ? <link rel='canonical' href={new URL(path, NEXT_PUBLIC_URL).toString()} /> : null}
+    <link rel='apple-touch-icon' sizes='180x180' href={config.info.icon.apple} />
+    <link rel='icon' type='image/png' sizes='32x32' href={config.info.icon.fav32} />
+    <link rel='icon' type='image/png' sizes='16x16' href={config.info.icon.fav16} />
+
     <GlobalStyles styles={globalStyles} />
   </>
 )
