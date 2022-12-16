@@ -12,6 +12,25 @@ const globalStyles = css`
     --background: ${colors.background};
     --border: ${colors.border};
     --text: ${colors.tertiary};
+
+    --gap-quarter: 0.25rem;
+    --gap-half: 0.5rem;
+    --gap: 1rem;
+    --gap-double: 2rem;
+
+    --bg: #fff;
+    --fg: #d0d6b5;
+    --accents-1: #0070f3;
+    --accents-2: #3291ff;
+    --accents-3: #666;
+    --geist-foreground: #000;
+    --geist-success: #690;
+
+    --radius: 4px;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+      'Droid Sans', 'Helvetica Neue', sans-serif;
+    --font-mono: SFMono-Regular, Menlo, Consolas, 'PT Mono', 'Liberation Mono', Courier, monospace;
   }
 
   /*

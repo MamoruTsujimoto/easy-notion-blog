@@ -47,6 +47,12 @@ const Single = ({ post, blocks }: Props) => {
   const imagePost = new URL(`/api/cover-post/${post.Slug}`, NEXT_PUBLIC_URL).toString()
   const imagePostSP = new URL(`/api/cover-post-sp/${post.Slug}`, NEXT_PUBLIC_URL).toString()
 
+  const onLoad = (e) => {
+    if (e.target.srcset) {
+      e.target.dataset.load = 'done'
+    }
+  }
+
   useEffect(() => {
     controls.start(inView ? 'visible' : 'hidden')
   }, [controls, inView])
@@ -74,6 +80,7 @@ const Single = ({ post, blocks }: Props) => {
               style={{
                 objectFit: 'cover',
               }}
+              onLoad={onLoad}
               placeholder='blur'
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1280, 700))}`}
             />
@@ -484,9 +491,15 @@ const Picture = styled.picture`
   img {
     width: 100%;
     height: 700px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 
     @media (max-width: ${styles.sizes.breakpoint.small}) {
       height: auto;
+    }
+
+    &[data-load='done'] {
+      opacity: 1;
     }
   }
 
@@ -593,7 +606,8 @@ const Body = styled.div`
       }
     }
 
-    &:has(h5) {
+    &:has(h5),
+    &:has(h6) {
       display: block;
       color: var(--text);
       text-decoration: none;
@@ -607,6 +621,12 @@ const Body = styled.div`
     h5 {
       margin: 50px 0 10px;
       ${mixins.fontSize(22, 34)}
+      text-decoration: none;
+    }
+
+    h6 {
+      margin: 50px 0 10px;
+      ${mixins.fontSize(18, 30)}
       text-decoration: none;
     }
   }
