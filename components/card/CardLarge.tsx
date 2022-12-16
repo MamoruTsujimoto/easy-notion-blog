@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
@@ -26,39 +25,36 @@ const CardLarge = ({ post }: Props) => {
   return (
     <CMSection>
       <CMArticle id={post.Date}>
-        <Link as={`/blog/${post.Slug}`} href={`/blog/${post.Slug}`} passHref scroll={false}>
-          <CMBody>
-            <ul>
+        <CMBody>
+          <ul>
+            <li>{post.Tags && post.Tags.length > 0 && post.Tags.map((tag: string) => <span key={tag}>{tag}</span>)}</li>
+          </ul>
+          <h1>{post.Title}</h1>
+          <CMInformation>
+            <ul className='story-status'>
               <li>
-                {post.Tags && post.Tags.length > 0 && post.Tags.map((tag: string) => <span key={tag}>{tag}</span>)}
+                <span className='story-publish'>
+                  <DateFormatter dateString={post.Date} />
+                </span>
               </li>
             </ul>
-            <h1>{post.Title}</h1>
-            <CMInformation>
-              <ul className='story-status'>
-                <li>
-                  <span className='story-publish'>
-                    <DateFormatter dateString={post.Date} />
-                  </span>
-                </li>
-              </ul>
-              <p>{post.Excerpt}</p>
-            </CMInformation>
-            <ButtonLarge>read more</ButtonLarge>
-          </CMBody>
-          <CMPicture>
-            <div className='new-image outline'>
-              <Image
-                src={imageURL}
-                width={780}
-                height={580}
-                alt={post.coverCaption}
-                onLoad={onLoad}
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-          </CMPicture>
-        </Link>
+            <p>{post.Excerpt}</p>
+          </CMInformation>
+          <ButtonLarge>read more</ButtonLarge>
+        </CMBody>
+        <CMPicture>
+          <div className='new-image outline'>
+            <Image
+              src={imageURL}
+              width={780}
+              height={580}
+              alt={post.coverCaption}
+              onLoad={onLoad}
+              priority={true}
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </CMPicture>
       </CMArticle>
     </CMSection>
   )

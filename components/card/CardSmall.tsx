@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
@@ -27,32 +26,30 @@ const CardSmall = ({ posts, title }: Props) => {
       <ArticleWrapper>
         {posts.map((post) => (
           <Article key={post.Slug}>
-            <Link as={`/blog/${post.Slug}`} href={`/blog/${post.Slug}`} passHref scroll={false}>
-              <div className='story-figure figure'>
-                <Image
-                  src={new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}
-                  width={373}
-                  height={250}
-                  alt={post.coverCaption}
-                  onLoad={onLoad}
-                  style={{ objectFit: 'cover' }}
-                />
+            <div className='story-figure figure'>
+              <Image
+                src={new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}
+                width={373}
+                height={250}
+                alt={post.coverCaption}
+                onLoad={onLoad}
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+            <div className='story-entrance'>
+              <span className='story-category'>{post.Tags}</span>
+              <h1>{post.Title}</h1>
+              <div className='story-information'>
+                <ul className='story-status'>
+                  <li>
+                    <span className='story-publish'>
+                      <DateFormatter dateString={post.Date} />
+                    </span>
+                  </li>
+                </ul>
+                <p>{post.Excerpt}</p>
               </div>
-              <div className='story-entrance'>
-                <span className='story-category'>{post.Tags}</span>
-                <h1>{post.Title}</h1>
-                <div className='story-information'>
-                  <ul className='story-status'>
-                    <li>
-                      <span className='story-publish'>
-                        <DateFormatter dateString={post.Date} />
-                      </span>
-                    </li>
-                  </ul>
-                  <p>{post.Excerpt}</p>
-                </div>
-              </div>
-            </Link>
+            </div>
           </Article>
         ))}
       </ArticleWrapper>
