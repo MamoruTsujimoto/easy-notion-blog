@@ -17,7 +17,7 @@ type Props = {
 const CardLarge = ({ post }: Props) => {
   const onLoad = (e) => {
     if (e.target.srcset) {
-      e.target.dataset.load = 'done'
+      return e.target.dataset.load
     }
   }
 
