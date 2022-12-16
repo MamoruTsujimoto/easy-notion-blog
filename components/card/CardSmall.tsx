@@ -1,10 +1,9 @@
 'use client'
 
-// import Link from 'next/link'
+import Link from 'next/link'
 import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Post } from 'lib/notion/interfaces'
-//import DateFormatter from 'components/Date'
 import styles from 'utils/styles'
 
 import { NEXT_PUBLIC_URL } from 'app/server-constants'
@@ -27,16 +26,18 @@ const CardSmall = ({ posts, title }: Props) => {
       <ArticleWrapper>
         {posts.map((post) => (
           <Article key={post.Slug}>
-            <div className='story-figure figure'>
-              <Image
-                src={new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}
-                width={373}
-                height={250}
-                alt={post.coverCaption}
-                onLoad={onLoad}
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+            <Link as={`/blog/${post.Slug}`} href={`/blog/${post.Slug}`} passHref scroll={false}>
+              <div className='story-figure figure'>
+                <Image
+                  src={new URL(`/api/eye-catch/${post.Slug}`, NEXT_PUBLIC_URL).toString()}
+                  width={373}
+                  height={250}
+                  alt={post.coverCaption}
+                  onLoad={onLoad}
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            </Link>
           </Article>
         ))}
       </ArticleWrapper>
