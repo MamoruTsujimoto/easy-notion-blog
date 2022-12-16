@@ -19,6 +19,23 @@ type Props = {
   blocks: Block[]
 }
 
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`
+
+const toBase64 = (str: string) =>
+  typeof window === 'undefined' ? Buffer.from(str).toString('base64') : window.btoa(str)
+
 const Single = ({ post, blocks }: Props) => {
   const controls = useAnimation()
 
@@ -51,14 +68,14 @@ const Single = ({ post, blocks }: Props) => {
             <Image
               src={imagePost}
               alt={post.coverCaption}
-              width={700}
-              height={475}
+              width={1280}
+              height={700}
               sizes='100vw'
               style={{
                 objectFit: 'cover',
               }}
               placeholder='blur'
-              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII='
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1280, 700))}`}
             />
             <div className='pictureCaption'>{post.coverCaption}</div>
           </Picture>
