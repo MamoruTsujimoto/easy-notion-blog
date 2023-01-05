@@ -15,7 +15,6 @@ import styles from '../../../../styles/blog.module.css'
 import { getPosts, getRankedPosts, getPostsByTag, getFirstPostByTag, getAllTags } from '../../../../lib/notion/client'
 
 export const revalidate = 60
-export const dynamicParams = false
 
 export async function generateStaticParams() {
   const tags = await getAllTags()

@@ -5,7 +5,6 @@ import { getAllPosts, getPostBySlug, getAllBlocksByBlockId } from 'lib/notion/cl
 import Single from 'components/layout/Single'
 
 export const revalidate = 30
-export const dynamicParams = false
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()

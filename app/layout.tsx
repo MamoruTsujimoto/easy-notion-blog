@@ -13,7 +13,7 @@ import animations from 'utils/animations'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='ja'>
+    <html lang='ja' prefix='og: https://ogp.me/ns#'>
       <body>
         <Root>
           <Grid>
