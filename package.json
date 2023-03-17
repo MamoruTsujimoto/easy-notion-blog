@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "0.1.1",
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "start": "next start",
     "build": "node scripts/set-blog-index-cache.js && next build && node scripts/expire-blog-index-cache.js",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",

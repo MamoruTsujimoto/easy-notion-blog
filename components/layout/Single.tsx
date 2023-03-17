@@ -60,6 +60,7 @@ const Single = ({ post, blocks }: Props) => {
               width={1280}
               height={700}
               sizes='100vw'
+              priority={true}
               style={{
                 objectFit: 'cover',
               }}

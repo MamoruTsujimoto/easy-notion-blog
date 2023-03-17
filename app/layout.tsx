@@ -18,9 +18,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Root>
           <Grid>
             <Header />
-            <motion.div initial='hidden' animate='visible' variants={animations.fadeIn}>
-              <Main>{children}</Main>
-            </motion.div>
+            <motion.main initial='hidden' animate='visible' variants={animations.fadeIn}>
+              <div>{children}</div>
+            </motion.main>
             <Footer />
           </Grid>
         </Root>
@@ -45,6 +45,18 @@ const Root = styled.div`
 
   @media (max-width: ${styles.sizes.breakpoint.small}) {
     width: 100%;
+  }
+
+  main.scale {
+    .entries {
+      transition: 1s ease-in-out;
+      transform: scale(0.9);
+      filter: blur(4px);
+    }
+
+    &:before {
+      filter: blur(4px);
+    }
   }
 `
 
@@ -75,28 +87,6 @@ const Grid = styled.div`
 
     @media (max-width: ${styles.sizes.breakpoint.small}) {
       transform: translateX(0);
-    }
-  }
-`
-
-const Main = styled.main`
-  grid-area: main;
-  position: relative;
-  width: 100%;
-
-  @media (max-width: ${styles.sizes.breakpoint.small}) {
-    max-width: 100%;
-  }
-
-  &.scale {
-    .entries {
-      transition: 1s ease-in-out;
-      transform: scale(0.9);
-      filter: blur(4px);
-    }
-
-    &:before {
-      filter: blur(4px);
     }
   }
 `
