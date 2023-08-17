@@ -82,6 +82,7 @@ const Single = ({ post, blocks }: Props) => {
         <motion.div ref={ref} initial='visible' animate={controls} variants={animations.fadeInUp}>
           <Body>
             <NoContents contents={blocks} />
+            <p>{post.Excerpt}</p>
             <PostBody blocks={blocks} />
           </Body>
         </motion.div>
